@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>حساب الأرباح من تجارة العملات الرقمية</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: right;
+            padding: 20px;
+        }
+        .container {
+            max-width: 500px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            box-sizing: border-box;
+        }
+        button {
+            background-color: #28a745;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+        .result {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>حساب الأرباح من تجارة العملات الرقمية</h2>
+    <label for="amount">مبلغ التداول ($):</label>
+    <input type="number" id="amount" step="0.01">
+
+    <label for="currentPrice">سعر العملة الحالي ($):</label>
+    <input type="number" id="currentPrice" step="0.01">
+
+    <label for="expectedPrice">سعر العملة المتوقع ($):</label>
+    <input type="number" id="expectedPrice" step="0.01">
+
+    <button onclick="calculateProfit()">احسب الربح</button>
+
+    <div class="result" id="result">
+        <h3 id="initialAmount"></h3>
+        <h3 id="finalAmount"></h3>
+        <h3 id="profit"></h3>
+    </div>
+</div>
+
+<script>
+    function calculateProfit() {
+        const amount = parseFloat(document.getElementById('amount').value);
+        const currentPrice = parseFloat(document.getElementById('currentPrice').value);
+        const expectedPrice = parseFloat(document.getElementById('expectedPrice').value);
+
+        if (isNaN(amount) || isNaN(currentPrice) || isNaN(expectedPrice)) {
+            document.getElementById('result').innerText = 'يرجى إدخال قيم صحيحة.';
+            return;
+        }
+
+        const units = amount / currentPrice;
+        const finalAmount = units * expectedPrice;
+        const profit = finalAmount - amount;
+
+        document.getElementById('initialAmount').innerText = `المبلغ قبل الأرباح: ${amount.toFixed(2)} دولار.`;
+        document.getElementById('finalAmount').innerText = `المبلغ بعد الأرباح: ${finalAmount.toFixed(2)} دولار.`;
+        document.getElementById('profit').innerText = `المبلغ الذي ربحناه: ${profit.toFixed(2)} دولار.`;
+    }
+</script>
+
+</body>
+</html>
